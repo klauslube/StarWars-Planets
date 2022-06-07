@@ -4,13 +4,15 @@ import MyContext from './MyContext';
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
+  const [filterByName, setFilterByName] = useState({ name: '' });
+  const [filteredPlanet, setFilteredPlanet] = useState(data);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
       const results = await response.json();
-      // console.log(results);
       setData(results.results);
+      setFilteredPlanet(results.results);
     };
     fetchData();
   }, []);
@@ -18,6 +20,10 @@ function Provider({ children }) {
   const contextValue = {
     data,
     setData,
+    filterByName,
+    setFilterByName,
+    filteredPlanet,
+    setFilteredPlanet,
   };
 
   return (
