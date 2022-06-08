@@ -21,18 +21,21 @@ function Filters() {
       .filter((planet) => planet.name.toLowerCase().includes(filterByName.name));
     setFilteredPlanet(filterPlanets);
 
-    const arrayFiltered = filterPlanets.reduce((acc, filter) => acc.filter((planet) => {
-      switch (filter.operator) {
-      case 'maior que':
-        return Number(planet[filter.operatorFilter]) > Number(filter.value);
-      case 'menor que':
-        return Number(planet[filter.operatorFilter]) < Number(filter.value);
-      case 'igual a':
-        return Number(planet[filter.operatorFilter]) === Number(filter.value);
-      default:
-        return true;
-      }
-    }), filterPlanets);
+    const arrayFiltered = filterByNumericValues
+      .reduce((acc, filter) => acc.filter((planet) => {
+        switch (filter.operatorFilter) {
+        case 'maior que':
+          console.log(planet[filter.columnFilter]);
+          return planet[filter.columnFilter] > Number(filter.valueFilter);
+        case 'menor que':
+          return planet[filter.columnFilter] < Number(filter.valueFilter);
+        case 'igual a':
+          return Number(planet[filter.columnFilter]) === Number(filter.valueFilter);
+        default:
+          return true;
+        }
+      }), filterPlanets);
+    // console.log(arrayFiltered);
     setFilteredPlanet(arrayFiltered);
   }, [filterByName, filterByNumericValues]);
 
@@ -68,11 +71,11 @@ function Filters() {
             data-testid="column-filter"
             onChange={ ({ target }) => setColumnFilter(target.value) }
           >
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
+            <option selected value="population">population</option>
+            <option value="orbital_period">orbital_period</option>
+            <option value="diameter">diameter</option>
+            <option value="rotation_period">rotation_period</option>
+            <option value="surface_water">surface_water</option>
           </select>
         </label>
         <label htmlFor="operator">
@@ -117,11 +120,11 @@ function Filters() {
         <label htmlFor="order">
           Ordenar
           <select name="order">
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
+            <option selected value="population">population</option>
+            <option value="orbital_period">orbital_period</option>
+            <option value="diameter">diameter</option>
+            <option value="rotation_period">rotation_period</option>
+            <option value="surface_water">surface_water</option>
           </select>
         </label>
         <label htmlFor="ascent">
