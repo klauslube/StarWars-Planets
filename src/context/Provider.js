@@ -6,6 +6,12 @@ function Provider({ children }) {
   const [data, setData] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [filteredPlanet, setFilteredPlanet] = useState(data);
+  const [
+    filterByNumericValues,
+    setFilterByNumericValues] = useState([]);
+  const [columnFilter, setColumnFilter] = useState('population');
+  const [operatorFilter, setOperatorFilter] = useState('maior que');
+  const [valueFilter, setValueFilter] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +30,14 @@ function Provider({ children }) {
     setFilterByName,
     filteredPlanet,
     setFilteredPlanet,
+    filterByNumericValues,
+    setFilterByNumericValues,
+    columnFilter,
+    setColumnFilter,
+    operatorFilter,
+    setOperatorFilter,
+    valueFilter,
+    setValueFilter,
   };
 
   return (
