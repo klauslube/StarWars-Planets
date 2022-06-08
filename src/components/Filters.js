@@ -14,6 +14,8 @@ function Filters() {
     setOperatorFilter,
     valueFilter,
     setValueFilter,
+    selectColumn,
+    setSelectColumn,
   } = useContext(MyContext);
 
   useEffect(() => {
@@ -41,13 +43,22 @@ function Filters() {
     setFilterByName({ name: target.value });
   };
 
-  const handleClickFilter = () => {
+  const handleRemoveFilter = () => {
+    const result = selectColumn
+      .filter((typeOption) => typeOption !== columnFilter);
+    setSelectColumn(result);
+    setColumnFilter(result[0]);
+  };
+
+  const handleClickFilter = (event) => {
+    event.preventDefault();
     const newFilter = {
       columnFilter,
       operatorFilter,
       valueFilter,
     };
     setFilterByNumericValues([...filterByNumericValues, newFilter]);
+    handleRemoveFilter();
   };
 
   return (
@@ -69,11 +80,9 @@ function Filters() {
             data-testid="column-filter"
             onChange={ ({ target }) => setColumnFilter(target.value) }
           >
-            <option selected value="population">population</option>
-            <option value="orbital_period">orbital_period</option>
-            <option value="diameter">diameter</option>
-            <option value="rotation_period">rotation_period</option>
-            <option value="surface_water">surface_water</option>
+            {selectColumn.map((option) => (
+              <option key={ option } value={ option }>{option}</option>
+            ))}
           </select>
         </label>
         <label htmlFor="operator">
@@ -99,7 +108,7 @@ function Filters() {
           onChange={ ({ target }) => setValueFilter(target.value) }
         />
         <button
-          type="button"
+          type="submit"
           data-testid="button-filter"
           onClick={ handleClickFilter }
         >
@@ -118,7 +127,7 @@ function Filters() {
         <label htmlFor="order">
           Ordenar
           <select name="order">
-            <option selected value="population">population</option>
+            <option value="population">population</option>
             <option value="orbital_period">orbital_period</option>
             <option value="diameter">diameter</option>
             <option value="rotation_period">rotation_period</option>
