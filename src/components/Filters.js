@@ -25,7 +25,6 @@ function Filters() {
       .reduce((acc, filter) => acc.filter((planet) => {
         switch (filter.operatorFilter) {
         case 'maior que':
-          console.log(planet[filter.columnFilter]);
           return planet[filter.columnFilter] > Number(filter.valueFilter);
         case 'menor que':
           return planet[filter.columnFilter] < Number(filter.valueFilter);
@@ -35,7 +34,6 @@ function Filters() {
           return true;
         }
       }), filterPlanets);
-    // console.log(arrayFiltered);
     setFilteredPlanet(arrayFiltered);
   }, [filterByName, filterByNumericValues]);
 

@@ -169,7 +169,7 @@ describe('2 - Filtre a tabela através de um texto, inserido num *campo de texto
   });
 });
 
-describe.only('3 - Crie um filtro para valores numéricos', () => {
+describe('3 - Crie um filtro para valores numéricos', () => {
 
   it('Renderize o filtro de coluna', async () => {
     await act(async () => {
@@ -294,7 +294,7 @@ describe.only('3 - Crie um filtro para valores numéricos', () => {
   });
 });
 
-describe('4 - Implemente múltiplos filtros numéricos', () => {
+describe.only('4 - Implemente múltiplos filtros numéricos', () => {
   it('Adicione dois filtros e verifique se a tabela foi atualizada com as informações filtradas', async () => {
     await act(async () => {
       render(<App />);
