@@ -12,7 +12,8 @@ function Provider({ children }) {
   const [columnFilter, setColumnFilter] = useState('population');
   const [operatorFilter, setOperatorFilter] = useState('maior que');
   const [valueFilter, setValueFilter] = useState(0);
-  const [selectColumn, setSelectColumn] = useState(['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+  const [selectColumn, setSelectColumn] = useState([
+    'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
 
   useEffect(() => {
     const fetchData = async () => {

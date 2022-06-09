@@ -43,7 +43,7 @@ function Filters() {
     setFilterByName({ name: target.value });
   };
 
-  const handleRemoveFilter = () => {
+  const handleRemoveOption = () => {
     const result = selectColumn
       .filter((typeOption) => typeOption !== columnFilter);
     setSelectColumn(result);
@@ -58,7 +58,18 @@ function Filters() {
       valueFilter,
     };
     setFilterByNumericValues([...filterByNumericValues, newFilter]);
-    handleRemoveFilter();
+    handleRemoveOption();
+  };
+
+  const handleRemoveFilter = (column) => {
+    setFilterByNumericValues((prev) => prev.filter((obj) => obj.columnFilter !== column));
+    setSelectColumn([...selectColumn, column]);
+  };
+
+  const removeAllFilters = () => {
+    setFilterByNumericValues([]);
+    setSelectColumn([
+      'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
   };
 
   return (
@@ -117,13 +128,33 @@ function Filters() {
         </button>
         {filterByNumericValues
           .map((filter, i) => (
-            <p key={ i }>
-              {filter.columnFilter}
-              /
-              {filter.operatorFilter}
-              /
-              {filter.valueFilter}
-            </p>))}
+            <div key={ i }>
+              <div data-testid="filter">
+                {filter.columnFilter}
+                /
+                {filter.operatorFilter}
+                /
+                {filter.valueFilter}
+                <button
+                  type="button"
+                  onClick={ () => handleRemoveFilter(filter.columnFilter) }
+                >
+                  remove
+                </button>
+              </div>
+            </div>))}
+        {filterByNumericValues.length >= 1
+          ? (
+            <button
+              type="button"
+              data-testid="button-remove-filters"
+              onClick={ removeAllFilters }
+            >
+              Remove All
+
+            </button>)
+          : null }
+
         <label htmlFor="order">
           Ordenar
           <select name="order">
