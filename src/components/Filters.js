@@ -5,6 +5,7 @@ function Filters() {
   const { data,
     filterByName,
     setFilterByName,
+    filteredPlanet,
     setFilteredPlanet,
     filterByNumericValues,
     setFilterByNumericValues,
@@ -16,12 +17,17 @@ function Filters() {
     setValueFilter,
     selectColumn,
     setSelectColumn,
+    order,
+    setOrder,
   } = useContext(MyContext);
 
   useEffect(() => {
     const filterPlanets = data
       .filter((planet) => planet.name.toLowerCase().includes(filterByName.name));
     setFilteredPlanet(filterPlanets);
+
+    // filteredPlanet.sort((a, b) => a.name.localeCompare(b.name));
+    // console.log(filteredPlanet);
 
     const arrayFiltered = filterByNumericValues
       .reduce((acc, filter) => acc.filter((planet) => {
@@ -70,6 +76,21 @@ function Filters() {
     setFilterByNumericValues([]);
     setSelectColumn([
       'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+  };
+
+  const handleChangeOrder = ({ target }) => {
+    setOrder({ ...order, [target.name]: target.value });
+  };
+
+  const handleClickOrder = () => {
+    if (order.sort === 'ASC') {
+      filteredPlanet.sort((a, b) => a[order.column] - b[order.column]); // como o filteredplanet esta sendo renderizado em outro componente,
+      setOrder((prev) => ({ ...prev, sort: 'ASC' })); // ele não mostraria a order na tela, apenas dando return, necessario setar a order.
+    }
+    if (order.sort === 'DESC') {
+      filteredPlanet.sort((a, b) => b[order.column] - a[order.column]);
+      setOrder((prev) => ({ ...prev, sort: 'DESC' }));
+    }
   };
 
   return (
@@ -143,7 +164,7 @@ function Filters() {
                 </button>
               </div>
             </div>))}
-        {filterByNumericValues.length >= 1
+        {filterByNumericValues.length > 0
           ? (
             <button
               type="button"
@@ -155,9 +176,14 @@ function Filters() {
             </button>)
           : null }
 
-        <label htmlFor="order">
+        <label htmlFor="column">
           Ordenar
-          <select name="order">
+          <select
+            name="column"
+            onChange={ handleChangeOrder }
+            data-testid="column-sort"
+            value={ order.column }
+          >
             <option value="population">population</option>
             <option value="orbital_period">orbital_period</option>
             <option value="diameter">diameter</option>
@@ -165,15 +191,36 @@ function Filters() {
             <option value="surface_water">surface_water</option>
           </select>
         </label>
-        <label htmlFor="ascent">
-          <input type="radio" name="ascent" />
+        <label htmlFor="ASC">
           Ascendente
+          <input
+            name="sort"
+            type="radio"
+            id="ASC"
+            data-testid="column-sort-input-asc"
+            value="ASC"
+            onChange={ handleChangeOrder }
+          />
         </label>
-        <label htmlFor="descent">
+        <label htmlFor="DESC">
           Descendente
-          <input type="radio" name="descent" />
+          <input
+            name="sort"
+            type="radio"
+            id="DESC"
+            data-testid="column-sort-input-desc"
+            value="DESC"
+            onChange={ handleChangeOrder }
+          />
         </label>
-        <button type="button">Ordenar</button>
+        <button
+          type="button"
+          data-testid="column-sort-button"
+          onClick={ handleClickOrder }
+        >
+          Ordenar
+
+        </button>
       </form>
     </div>
   );

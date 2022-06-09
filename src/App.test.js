@@ -340,7 +340,7 @@ describe('4 - Implemente múltiplos filtros numéricos', () => {
   });
 });
 
-describe.only('5 - Não utilize filtros repetidos', () => {
+describe('5 - Não utilize filtros repetidos', () => {
 
   it('Filtre por população e o remove das opções', async () => {
     await act(async () => {
@@ -377,7 +377,7 @@ describe.only('5 - Não utilize filtros repetidos', () => {
   });
 });
 
-describe.only('6 - Apague um filtro de valor numérico ao clicar no ícone de X de um dos filtros e apague todas filtragens numéricas simultaneamente ao clicar em outro botão de Remover todas filtragens', () => {
+describe('6 - Apague um filtro de valor numérico ao clicar no ícone de X de um dos filtros e apague todas filtragens numéricas simultaneamente ao clicar em outro botão de Remover todas filtragens', () => {
 
   const removeFilter = async (index = 0) => {
     const filters = await screen.findAllByTestId(REMOVE_FILTER_SELECTOR);
@@ -458,7 +458,7 @@ describe.only('6 - Apague um filtro de valor numérico ao clicar no ícone de X 
   });
 });
 
-describe('7 - Ordene as colunas de forma ascendente ou descendente', () => {
+describe.only('7 - Ordene as colunas de forma ascendente ou descendente', () => {
 
   it('Verifique a ordenação inicial', async () => {
     await act(async () => {

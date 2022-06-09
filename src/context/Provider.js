@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './MyContext';
 
+const M = -1;
+
 function Provider({ children }) {
   const [data, setData] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
@@ -14,13 +16,15 @@ function Provider({ children }) {
   const [valueFilter, setValueFilter] = useState(0);
   const [selectColumn, setSelectColumn] = useState([
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+  const [order, setOrder] = useState({ column: 'population', sort: 'ASC' });
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
       const results = await response.json();
       setData(results.results);
-      setFilteredPlanet(results.results);
+      results.results.sort((a, b) => (a.name > b.name ? 1 : M));
+      setFilteredPlanet([...results.results]);
     };
     fetchData();
   }, []);
@@ -42,6 +46,8 @@ function Provider({ children }) {
     setValueFilter,
     selectColumn,
     setSelectColumn,
+    order,
+    setOrder,
   };
 
   return (
