@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import MyContext from '../context/MyContext';
 
 function Filters() {
-  const [radio, setRadio] = useState('');
   const { data,
     filterByName,
     setFilterByName,
@@ -80,31 +79,25 @@ function Filters() {
   };
 
   const handleChangeOrder = ({ target }) => {
-    // setOrder({ ...order, [target.name]: target.value });
-    setRadio(target.value);
+    setOrder({ ...order, [target.name]: target.value });
   };
 
   const handleClickOrder = () => {
-    if (radio === 'ASC') {
-      filteredPlanet.sort((a, b) => {
-        if (a[order.column] === 'unknown') {
-          return 1;
-        }
-        return a[order.column] - b[order.column];
-      }); // como o filteredplanet esta sendo renderizado em outro componente,
-      // ele não mostraria a order na tela, apenas dando return, necessario setar a order.
+    const M = -1;
+    if (order.sort === 'ASC') {
+      filteredPlanet.sort((a, b) => a[order.column] - b[order.column]);
+      setOrder((prev) => ({ ...prev, sort: 'ASC' }));
     }
-    if (radio === 'DESC') {
+    if (order.sort === 'DESC') {
       filteredPlanet.sort((a, b) => {
-        if (a[order.column] === 'unknown') {
-          return 1;
-        }
+        if (a[order.column] === 'unknown') return 1;
+
+        if (b[order.column] === 'unknown') return M;
+
         return b[order.column] - a[order.column];
       });
-      // setOrder((prev) => ({ ...prev, sort: 'DESC' }));
+      setOrder((prev) => ({ ...prev, sort: 'DESC' }));
     }
-    // setOrder((prev) => ({ ...prev, sort: 'DESC' }));
-    setOrder((prev) => ({ ...prev, sort: radio }));
   };
 
   return (

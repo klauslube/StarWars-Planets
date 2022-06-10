@@ -23,7 +23,7 @@ function Provider({ children }) {
       const response = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
       const results = await response.json();
       setData(results.results);
-      // results.results.sort((a, b) => (a.name > b.name ? 1 : M));
+      results.results.sort((a, b) => (a.name > b.name ? 1 : M));
       setFilteredPlanet([...results.results]);
     };
     fetchData();
