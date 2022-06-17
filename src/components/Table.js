@@ -1,14 +1,23 @@
 import React, { useContext } from 'react';
 import MyContext from '../context/MyContext';
+import planetImages from '../images/planetImages';
+import '../styles/table.module.css';
 
 function Table() {
   const { filteredPlanet } = useContext(MyContext);
+  const unknownPlanets = [
+    'Aleen Minor',
+    'unknown', 'Troiken', 'Tholoth', 'Quermia', 'Stewjon', 'Tund', 'Glee Anselm',
+  ];
+  const filtered = filteredPlanet
+    .filter((planet) => !planet === unknownPlanets.includes(planet.name));
 
   return (
-    <div>
+    <div className="wrapper">
       <table>
         <thead>
           <tr>
+            <th>Image</th>
             <th>Name</th>
             <th>Rotation Period</th>
             <th>Orbital Period</th>
@@ -18,17 +27,20 @@ function Table() {
             <th>Terrain</th>
             <th>Surface Water</th>
             <th>Population</th>
-            <th>Films</th>
-            <th>Created</th>
-            <th>Edited</th>
-            <th>URL</th>
           </tr>
         </thead>
         <tbody>
           {
-            filteredPlanet
+            filtered
               .map((planet) => (
                 <tr key={ planet.name }>
+                  <td>
+                    <img
+                      className="planetImages"
+                      src={ planetImages.find((img) => img.planet === planet.name).image }
+                      alt={ planet.name }
+                    />
+                  </td>
                   <td data-testid="planet-name">{planet.name}</td>
                   <td>{planet.rotation_period}</td>
                   <td>{planet.orbital_period}</td>
@@ -38,10 +50,6 @@ function Table() {
                   <td>{planet.terrain}</td>
                   <td>{planet.surface_water}</td>
                   <td>{planet.population}</td>
-                  <td>{planet.films}</td>
-                  <td>{planet.created}</td>
-                  <td>{planet.edited}</td>
-                  <td>{planet.url}</td>
                 </tr>
               ))
           }

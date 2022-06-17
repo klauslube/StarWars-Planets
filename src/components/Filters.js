@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import MyContext from '../context/MyContext';
+import '../styles/filters.module.css';
+import xxx from '../images/logo.png';
 
 function Filters() {
   const { data,
@@ -25,9 +27,6 @@ function Filters() {
     const filterPlanets = data
       .filter((planet) => planet.name.toLowerCase().includes(filterByName.name));
     setFilteredPlanet(filterPlanets);
-
-    // filteredPlanet.sort((a, b) => a.name.localeCompare(b.name));
-    // console.log(filteredPlanet);
 
     const arrayFiltered = filterByNumericValues
       .reduce((acc, filter) => acc.filter((planet) => {
@@ -101,7 +100,8 @@ function Filters() {
   };
 
   return (
-    <div>
+    <div className="wrapper-header">
+      <img className="image" src={ xxx } alt="starWars-logo" />
       <div>
         <input
           placeholder="nome do planeta"

@@ -1,0 +1,32 @@
+/* table {
+  position: relative;
+  left: 1vw;
+}
+
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+  
+}
+
+table {
+  margin-top: 50px;
+}
+
+table th {
+  background-color: black;
+  border: solid 1px white;
+  height: 40px;
+}
+
+table tr:nth-child(odd) {
+  background-color: rgba(200, 200, 200, 0.1);
+}
+
+table tr:nth-child(even) {
+  background-color: rgba(0, 0, 5, 0);
+}
+
+table td,th {
+  min-width: 140px;
+} */

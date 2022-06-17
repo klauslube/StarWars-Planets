@@ -1,41 +1,100 @@
-.App {
+body {
+  background-attachment: fixed;
+  background-image: url('./images/stars.gif');
+  background-color: black;
+  color: rgb(255, 255, 255);
+  font-family: 'Source Serif Pro', serif, Arial, Helvetica, sans-serif;
   text-align: center;
+  font-size: 17px;
+  font-weight: 900;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.image {
+  width: 400px;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+table tr {
+  position: relative;
+  left: 50px;
 }
 
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+  
 }
 
-.App-link {
-  color: #61dafb;
+table {
+  margin-top: 50px;
 }
 
-@keyframes App-logo-spin {
+table th {
+  background-color: black;
+  border: solid 1px white;
+  height: 40px;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+table tr:nth-child(odd) {
+  background-color: rgba(200, 200, 200, 0.1);
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+table tr:nth-child(even) {
+  background-color: rgba(0, 0, 5, 0);
+}
+
+table td {
+  min-width: 140px;
+}
+
+table th {
+  min-width: 100px;
+  max-width: 200px;
+}
+
+input,select,button {
+  border: none;
+  border-radius: 28px;
+  margin: 10px 15px;
+  padding: 10px;
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Source Serif Pro', serif, Arial, Helvetica, sans-serif;
+}
+
+button {
+  background-color: rgb(255, 255, 10);
+  cursor: pointer;
+  width: 100px;
+}
+
+button:hover {
+  font-weight: 900;
+}
+
+input[type='radio']:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #000000;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
 }
